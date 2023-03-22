@@ -52,6 +52,61 @@
 cd /data/local/tmp && ./Inject -f -n bin.mt.plus -so /data/local/tmp/libHook.so -symbols hello
 ```
 
+## 运行结果
+```
+gemini:/ # cd /data/local/tmp && ./Inject -f -n com.friday.sotest -so /data/local/tmp/libHook.so -symbols hello
+m.friday.sotest -so /data/local/tmp/libHook.so -symbols hello                 <
+[+] libc_path is /system/lib64/libc.so
+[+] linker_path is /system/bin/linker64
+[+] libdl_path is /system/lib64/libdl.so
+[+] system libs is OK
+[+] handle_selinux_init is OK
+[+] Start Inject
+[+] app_start_activity is com.friday.sotest/.MainActivity
+[+] am start com.friday.sotest/.MainActivity
+Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.friday.sotest/.MainActivity }
+Warning: Activity not started, its current task has been brought to the front
+[+] pkg_name is com.friday.sotest
+[+] get_pid_by_name pid is 9215
+[+] lib_path is /data/local/tmp/libHook.so
+[+] symbols is hello
+[+] handle_parameter is OK
+[-] SELinux is Enforcing
+[+] Selinux has been changed to Permissive
+[+] attach porcess success, pid:9215
+[+] [get_remote_func_addr] lmod=0x79A66E1000, rmod=0x773A8E1000, lfunc=0x79A674A798, rfunc=0x773A94A798
+[+] mmap RemoteFuncAddr:0x773a94a798
+[+] ptrace continue process success, pid:9215
+[+] ptrace call ret status is 1151
+[+] ptrace_call mmap success, return value=77399A3000, pc=773A8E1000
+[+] Remote Process Map Memory Addr:0x77399a3000
+[+] linker_path value:/system/bin/linker64
+[+] [get_remote_func_addr] lmod=0x79A666B000, rmod=0x773AD5D000, lfunc=0x79A666C0C0, rfunc=0x773AD5E0C0
+[+] dlopen RemoteFuncAddr:0x773ad5e0c0
+[+] [get_remote_func_addr] lmod=0x79A666B000, rmod=0x773AD5D000, lfunc=0x79A666C0EC, rfunc=0x773AD5E0EC
+[+] dlsym RemoteFuncAddr:0x773ad5e0ec
+[+] [get_remote_func_addr] lmod=0x79A666B000, rmod=0x773AD5D000, lfunc=0x79A666C130, rfunc=0x773AD5E130
+[+] dlclose RemoteFuncAddr:0x773ad5e130
+[+] [get_remote_func_addr] lmod=0x79A666B000, rmod=0x773AD5D000, lfunc=0x79A666C0D8, rfunc=0x773AD5E0D8
+[+] dlerror RemoteFuncAddr:0x773ad5e0d8
+[+] Get imports: dlopen: 3ad5e0c0, dlsym: 3ad5e0ec, dlclose: 3ad5e130, dlerror: 3ad5e0d8
+[+] LibPath = /data/local/tmp/libHook.so
+[+] ptrace continue process success, pid:9215
+[+] ptrace call ret status is 1151
+[+] ptrace_call dlopen success, Remote Process load module Addr:0x62a5f9ee0727c1f
+[+] func symbols is hello
+[+] Have func !!
+[+] ptrace continue process success, pid:9215
+[+] ptrace call ret status is 1151
+[+] ptrace_call dlsym success, Remote Process ModuleFunc Addr:0x771d08464c
+[+] ptrace continue process success, pid:9215
+[+] ptrace call ret status is 1151
+[+] Recover Regs Success
+[+] detach process success, pid:9215
+[+] SELinux has been rec
+[+] Finish Inject
+```
+
 # TODO LIST
 
 ## Finished
@@ -87,3 +142,5 @@ cd /data/local/tmp && ./Inject -f -n bin.mt.plus -so /data/local/tmp/libHook.so 
 [androidinject](https://github.com/mergerly/androidinject) By mergerly
 
 [TinyInjector](https://github.com/shunix/TinyInjector) By shunix
+
+[injectvm-binderjack](https://github.com/Chainfire/injectvm-binderjack) By Chainfire
